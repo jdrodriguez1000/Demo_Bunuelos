@@ -54,3 +54,19 @@
 - release-please implementarse en Etapa 2.1 cuando existan features que versionar
 - Protección de ramas `prod` (stricta), `test` (parcial), `dev` (parcial), `feat/*` (abierta) para implementar en Etapa 2.1
 
+### Sesión: 21 de marzo de 2026 (Gobernanza avanzada — CC_00001 y CC_00002)
+
+**✅ Lo que funcionó bien:**
+- El flujo de `/change-control` funcionó correctamente para modificar una etapa cerrada — el CC como gate impidió cambios improvisados
+- Detectar la brecha del Protocolo de Inicio (agente amnésico) fue valioso — resuelto inmediatamente con CC_00002
+- Incluir el CI Quality Gate en CC_00001 (no solo release-please) fue una corrección importante que el usuario señaló
+
+**⚠️ Lo que no funcionó / fricción encontrada:**
+- CC_00001 se creó sin mencionar el CI Quality Gate — el usuario tuvo que señalarlo explícitamente; el agente debió haberlo incluido desde el inicio al conocer la action del usuario
+
+**💡 Decisiones clave tomadas:**
+- Protocolo de Inicio ampliado a 5 pasos: se leen `lessons-learned.md` (etapa activa) y CCs aprobados antes de actuar
+- CI Quality Gate adaptado para Demo_Bunuelos: `engine/tests/` (no `tests/`), `web/` (no `dashboard/`), escucha en `dev`/`test`/`prod` (no `main`)
+- `/code-review-demo` (skill customizado) preferido sobre `/simplify` genérico — se creará en Etapa 2.1
+- Un CC por cambio temático — CC_00001 (§6 CI/CD) y CC_00002 (§1 Protocolo) son independientes y correctamente separados
+
