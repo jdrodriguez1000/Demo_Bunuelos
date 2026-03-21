@@ -6,27 +6,34 @@
 
 ## 🕒 Punto de Guardado
 
-- **Última actualización:** 21 de marzo de 2026, cierre de Etapa 1.1
-- **Fase / Etapa:** `Fase 1 — Etapa 1.2` (Etapa 1.1 cerrada formalmente)
+- **Última actualización:** 21 de marzo de 2026, cierre de sesión post-Etapa 1.1 (educación sobre Git Flow y CI/CD)
+- **Fase / Etapa:** `Fase 1 — Etapa 1.2` (pendiente iniciar: Configuración Supabase)
 
 ---
 
 ## 📂 Archivos en el Escritorio (Working Set)
 
-- `docs/tasks/f01_01_task.md` — Etapa 1.1 completada: 44/45 tareas marcadas ✅. Pendiente TSK-01-44 (prueba formal /change-control)
-- `docs/executives/f01_01_executive.md` — Resumen Ejecutivo de Etapa 1.1 creado y válido como gate de avance
-- `PROJECT_index.md` — Actualizado: Etapa 1.2 como activa, hito 1.1 marcado ✅
-- `PROJECT_handoff.md` — Este archivo
-- `requirements.txt` — venv recreado e instalado con exit code 0 (Python 3.12+)
-- `.claude.json` — MCP GitHub configurado con token desde .env (modo lectura)
+- **Memory archivos (nuevos):**
+  - `github_actions_plan.md` — Roadmap completo de GitHub Actions (3 fases: validación → release-please → full automation)
+  - `mcp_restrictions.md` — Guardrails para MCP GitHub (lectura-only, escritura requiere orden)
+- **Documentos actualizados en sesión anterior:**
+  - `docs/executives/f01_01_executive.md` — Resumen Ejecutivo (gate de avance cumplido)
+  - `PROJECT_index.md` — Etapa 1.1 cerrada ✅, Etapa 1.2 como activa
+  - `docs/lessons/lessons-learned.md` — Lecciones de cierre de Etapa 1.1 registradas
+  - `docs/tasks/f01_01_task.md` — 44/45 tareas completadas
 
 ---
 
 ## 🧠 Contexto Inmediato
 
-La Etapa 1.1 (Gobernanza y Estructura Base) fue cerrada formalmente en esta sesión. Se completaron 44 de 45 tareas, se generó el Resumen Ejecutivo (`docs/executives/f01_01_executive.md`) y se actualizó el `PROJECT_index.md` con el nuevo estado. La única tarea pendiente es la prueba formal del skill `/change-control` modo LIST (TSK-01-44), que no bloquea el avance.
+**Esta sesión fue educativa y de planificación CI/CD.** Se aclaró el Git Flow `feat/* → dev → test → prod` mencionado brevemente en CLAUDE.md §6 pero ambiguo. Se explicó:
+- Por qué existe cada rama (aislamiento, integración, validación, producción)
+- El paso crítico: sincronización automática `test → dev` antes de `test → prod`
+- Cuándo implementar GitHub Actions sin costos innecesarios (Validación en 1.2, Automatización en 2.1+)
+- Protección de ramas en GitHub (prod stricta, test parcial, dev parcial, feat/* abierta)
+- Rol de `main` en el futuro (rama de gobernanza permanente, separada de `prod`)
 
-El entorno Python fue recreado y verificado (pip install exit code 0). MCP GitHub fue configurado en modo lectura. El primer commit de gobernanza fue enviado a `main` (`bf77208`). El push a GitHub origin está pendiente para esta o la próxima sesión.
+Se documentó todo en memoria para referencia en Etapa 1.2 y futuras.
 
 ---
 
@@ -38,6 +45,15 @@ Ninguno — la sesión cerró en estado limpio.
 
 ## 🎯 Próxima Acción Inmediata (Next Step)
 
-1. Ejecutar `git push origin main` para subir el commit de gobernanza a GitHub (si no se hizo antes de cerrar).
-2. Iniciar Etapa 1.2 con `/sdd-doc` para crear los 4 documentos SDD: `docs/reqs/f01_02_prd.md`, `docs/specs/f01_02_spec.md`, `docs/plans/f01_02_plan.md`, `docs/tasks/f01_02_task.md`.
-3. Para crear el PRD de Etapa 1.2, tener a mano las credenciales de Supabase (URL del proyecto + anon key).
+1. **Iniciar Etapa 1.2:** Ejecutar `/sdd-doc` para crear los 4 documentos SDD de Etapa 1.2:
+   - `docs/reqs/f01_02_prd.md` — Qué es Supabase, por qué se conecta, métricas de éxito
+   - `docs/specs/f01_02_spec.md` — Cómo se configura, credenciales, test de conexión
+   - `docs/plans/f01_02_plan.md` — Orden de ejecución (crear proyecto, obtener credenciales, configurar .env, verificar)
+   - `docs/tasks/f01_02_task.md` — Tareas atómicas para la etapa
+
+2. **Prerequisito:** Tener a mano:
+   - URL del proyecto Supabase (si ya existe)
+   - Anon key / service role key
+   - Nombre de la base de datos (recomendación: `cafeteria_sas`)
+
+3. **Post-Etapa 1.2 (futures sesiones):** Crear ramas `dev`, `test`, `prod` en GitHub y configurar protecciones según memory `github_actions_plan.md`.
