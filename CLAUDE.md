@@ -26,7 +26,11 @@ Este archivo define las leyes, límites y terreno de juego para cualquier Agente
     1. Leer `CLAUDE.md` — Reglas globales e invariantes del proyecto.
     2. Leer `PROJECT_index.md` — Entender en qué fase/etapa está el proyecto y qué documentos SDD gobiernan el trabajo actual.
     3. Leer `PROJECT_handoff.md` — Retomar el estado táctico exacto: archivos activos, bloqueador pendiente y próxima acción.
-    *   Solo después de completar los 3 pasos el agente está autorizado a escribir código o ejecutar acciones.
+    4. Leer `docs/lessons/lessons-learned.md` — **Solo la sección de la etapa activa.** Internalizar errores pasados y decisiones validadas para no repetirlos.
+    5. Leer `docs/changes/` — **Solo los CCs en estado `✅ Aprobado`.** Ignorar Pendientes y No Aprobados. Garantiza que el agente conoce todos los cambios aprobados a la constitución y SDD.
+    *   Solo después de completar los 5 pasos el agente está autorizado a escribir código o ejecutar acciones.
+
+    > **Control de Cambio:** Pasos 4 y 5 añadidos por `CC_00002` (2026-03-21).
 *   **Protocolo de Cierre de Sesión:**
     *   Cuando el usuario diga **"Terminamos"** o señale el fin de la sesión, es **OBLIGACIÓN** del agente reescribir `PROJECT_handoff.md` con el estado exacto al momento del cierre: archivos modificados, contexto inmediato, último error/bloqueador y próxima acción concreta.
 *   **Idioma:**
