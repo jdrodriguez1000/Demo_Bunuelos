@@ -1,47 +1,29 @@
-# Entorno Virtual Python
+# Entorno Python
 venv/
-ENV/
-env/
-.env
-*.env
-*.venv
-
-# Caché de Python
 __pycache__/
-*.py[cod]
-*$py.class
-.pytest_cache/
-.tox/
-.coverage
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.log
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
 
-# Web (Next.js / Node)
-node_modules/
-.next/
-out/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
+# Secretos
+.env
 
-# IA / Data
+# Artefactos de IA (gestionados por DVC)
 *.pkl
-*.model
-*.csv
-*.xlsx
-.dvc/
-! .dvc/config
+*.joblib
+*.h5
 /data/
 
-# Sistema y Otros
-.DS_Store
-Thumbs.db
-.ipynb_checkpoints/
+# DVC
+.dvc/cache/
+.dvc/tmp/
+
+# IDEs
 .vscode/
 .idea/
-*.tmp
-*.temp
+
+# OS
+.DS_Store
+Thumbs.db
