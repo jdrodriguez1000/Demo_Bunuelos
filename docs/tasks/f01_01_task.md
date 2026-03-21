@@ -58,18 +58,18 @@
 - [x] `[TSK-01-23]` Verificar que `.claude/skills/update-index/SKILL.md` existe con frontmatter correcto (`name`, `description`, `invocation`, `triggers`).
 - [x] `[TSK-01-24]` Verificar que `.claude/skills/session-close/SKILL.md` existe con frontmatter correcto.
 - [x] `[TSK-01-25]` Verificar que `.claude/skills/sdd-doc/SKILL.md` existe con frontmatter correcto y los 4 modos (A/B/C/D).
-- [ ] `[TSK-01-26]` Probar invocación de `/update-index`: verificar que actualiza `PROJECT_index.md` sin errores (`[MET-02]`).
-- [ ] `[TSK-01-27]` Probar invocación de `/session-close`: verificar que crea/actualiza `PROJECT_handoff.md` sin errores (`[MET-02]`).
-- [ ] `[TSK-01-28]` Probar invocación de `/sdd-doc`: verificar que pregunta modo y etapa antes de escribir (`[MET-02]`).
+- [x] `[TSK-01-26]` Probar invocación de `/update-index`: verificar que actualiza `PROJECT_index.md` sin errores (`[MET-02]`).
+- [x] `[TSK-01-27]` Probar invocación de `/session-close`: verificar que crea/actualiza `PROJECT_handoff.md` sin errores (`[MET-02]`).
+- [x] `[TSK-01-28]` Probar invocación de `/sdd-doc`: verificar que pregunta modo y etapa antes de escribir (`[MET-02]`).
 
 ---
 
 ## Bloque 7 — Commit Inicial y Verificación Final (`[REQ-09]` / `[MET-01..05]`)
 
-- [ ] `[TSK-01-29]` Revisar el DoD completo del plan (`docs/plans/f01_01_plan.md` §5) y confirmar que todos los ítems están marcados.
-- [ ] `[TSK-01-30]` Stagear los archivos de gobernanza: `CLAUDE.md`, `PROJECT_index.md`, `.gitignore`, `requirements.txt`, `.env.example`, `docs/`, `.claude/`.
-- [ ] `[TSK-01-31]` Crear commit atómico en `main`: `feat: etapa 1.1 — gobernanza y estructura base completada`.
-- [ ] `[TSK-01-32]` Verificar con `git log --oneline` que el commit aparece registrado.
+- [x] `[TSK-01-29]` Revisar el DoD completo del plan (`docs/plans/f01_01_plan.md` §5) y confirmar que todos los ítems están marcados.
+- [x] `[TSK-01-30]` Stagear los archivos de gobernanza: `CLAUDE.md`, `PROJECT_index.md`, `.gitignore`, `requirements.txt`, `.env.example`, `docs/`, `.claude/`.
+- [x] `[TSK-01-31]` Crear commit atómico en `main`: `feat: etapa 1.1 — gobernanza y estructura base completada`.
+- [x] `[TSK-01-32]` Verificar con `git log --oneline` que el commit aparece registrado.
 
 ---
 
@@ -79,17 +79,17 @@
 - [x] `[TSK-01-37]` Crear carpeta `docs/executives/`.
 - [x] `[TSK-01-38]` Crear carpeta `docs/changes/`.
 - [x] `[TSK-01-39]` Inicializar `docs/lessons/lessons-learned.md` con estructura base: encabezado del proyecto + sección `## Fase 1 — Etapa 1.1` vacía lista para recibir entradas de sesión.
-- [ ] `[TSK-01-40]` Crear skill `/close-stage` en `.claude/skills/close-stage/SKILL.md` con frontmatter correcto y lógica para generar resumen ejecutivo en lenguaje de negocio.
-- [ ] `[TSK-01-41]` Crear skill `/change-control` en `.claude/skills/change-control/SKILL.md` con frontmatter correcto y los 4 modos: CREATE, APPROVE, REJECT, LIST.
-- [ ] `[TSK-01-42]` Actualizar skill `/session-close` para añadir Paso 4: registro en `docs/lessons/lessons-learned.md` al cierre de cada sesión.
-- [ ] `[TSK-01-43]` Probar invocación de `/close-stage`: verificar que solicita etapa y genera el documento ejecutivo sin errores (`[MET-06]`).
+- [x] `[TSK-01-40]` Crear skill `/close-stage` en `.claude/skills/close-stage/SKILL.md` con frontmatter correcto y lógica para generar resumen ejecutivo en lenguaje de negocio.
+- [x] `[TSK-01-41]` Crear skill `/change-control` en `.claude/skills/change-control/SKILL.md` con frontmatter correcto y los 4 modos: CREATE, APPROVE, REJECT, LIST.
+- [x] `[TSK-01-42]` Actualizar skill `/session-close` para añadir Paso 4: registro en `docs/lessons/lessons-learned.md` al cierre de cada sesión.
+- [x] `[TSK-01-43]` Probar invocación de `/close-stage`: verificar que solicita etapa y genera el documento ejecutivo sin errores (`[MET-06]`).
 - [ ] `[TSK-01-44]` Probar invocación de `/change-control` modo LIST: verificar que responde sin errores aunque no haya CCs (`[MET-06]`).
-- [ ] `[TSK-01-45]` Ejecutar `ls docs/` y verificar que las 7 carpetas aparecen: `reqs/`, `specs/`, `plans/`, `tasks/`, `lessons/`, `executives/`, `changes/` (`[MET-07]`).
+- [x] `[TSK-01-45]` Ejecutar `ls docs/` y verificar que las 7 carpetas aparecen: `reqs/`, `specs/`, `plans/`, `tasks/`, `lessons/`, `executives/`, `changes/` (`[MET-07]`).
 
 ---
 
 ## Cierre de Etapa
 
-- [ ] `[TSK-01-33]` Ejecutar `/update-index` para marcar el hito 1.1 como ✅ en `PROJECT_index.md`.
-- [ ] `[TSK-01-34]` Actualizar el estado de los 4 docs SDD de esta etapa a ✅ en `PROJECT_index.md`.
-- [ ] `[TSK-01-35]` Ejecutar `/session-close` para reescribir `PROJECT_handoff.md` con el estado de cierre de la etapa y la próxima acción (inicio de Etapa 1.2 — Supabase).
+- [x] `[TSK-01-33]` Ejecutar `/update-index` para marcar el hito 1.1 como ✅ en `PROJECT_index.md`.
+- [x] `[TSK-01-34]` Actualizar el estado de los 4 docs SDD de esta etapa a ✅ en `PROJECT_index.md`.
+- [x] `[TSK-01-35]` Ejecutar `/session-close` para reescribir `PROJECT_handoff.md` con el estado de cierre de la etapa y la próxima acción (inicio de Etapa 1.2 — Supabase).
