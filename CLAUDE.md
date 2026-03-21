@@ -111,16 +111,25 @@ Este archivo define las leyes, límites y terreno de juego para cualquier Agente
 ## 6. Flujos de Trabajo (Workflow y Git) 🔄
 
 *   **Git Flow:** `feat/*` ➔ `dev` ➔ `test` ➔ `prod`.
-    *   *Paso Crítico:* Al finalizar pruebas en `test`, sincronizar cambios de vuelta a `dev` antes del merge final a `prod`.
+    *   `main` es la rama de **gobernanza permanente** (SDD, resúmenes ejecutivos, CLAUDE.md). No es rama de desarrollo ni equivale a `prod`.
+    *   `prod` es la rama de código en producción visible para usuarios.
+    *   *Paso Crítico (orden obligatorio):* Al finalizar pruebas en `test`, sincronizar arreglos de vuelta a `dev` **primero**, luego mergear `dev` ➔ `prod`. Orden: `test → dev (sync) → prod`. Nunca `test → prod` directamente.
 *   **Reglas de Commits:** Commits atómicos, en **español**, con prefijos:
     *   `feat:` (Nueva funcionalidad)
     *   `fix:` (Corrección de errores)
     *   `docs:` (Documentación)
     *   `refactor:` (Cambios de código que no corrigen ni añaden)
+*   **GitHub Actions (implementar en Etapa 2.1):**
+    *   **CI Quality Gate:** Corre automáticamente en cada push/PR. Ejecuta en paralelo: (a) tests del engine Python con `pytest` + reporte JSON en `engine/tests/`, (b) tests del dashboard con `npm test` en `web/`. Requiere secrets: `SUPABASE_URL`, `SUPABASE_KEY`, `SUPABASE_SERVICE_ROLE_KEY`. Escucha en PRs hacia `dev`, `test` y `prod` (no hacia `main`).
+    *   **Code Review Gate (`/code-review-demo`):** Skill personalizado que corre en cada PR hacia `dev`. Valida conformidad con SDD, estándares de CLAUDE.md §5 y deuda técnica. Es un gate: PR bloqueado si falla.
+    *   **`release-please`:** Genera versiones semánticas automáticas (MAJOR.MINOR.PATCH) al mergear a `prod`. Crea tags, changelogs y releases en GitHub sin intervención manual.
+    *   **Protección de ramas:** `prod` (aprobación humana obligatoria), `test` y `dev` (CI Quality Gate debe pasar), `feat/*` (libre).
 *   **Comandos Recurrentes:**
     *   *Engine:* `python engine/main.py --mode [train|forecast]`
     *   *Web:* `npm run dev` (Dashboard local)
     *   *Tests:* `pytest engine/tests` | `npm test`
+
+> **Control de Cambio:** Esta sección fue ampliada por `CC_00001` (2026-03-21).
 
 ---
 
