@@ -90,3 +90,25 @@
 - `docs/database/schema.sql` creado como fuente de verdad técnica del schema — regla de mantenimiento añadida a CLAUDE.md §5
 - Diccionario de columnas vive en la SPEC (no en un documento separado) — evita duplicación
 
+### Sesión: 22 de marzo de 2026 (Implementación Etapa 1.2)
+
+**✅ Lo que funcionó bien:**
+- El ciclo TDD rojo → verde funcionó perfectamente: 4 tests en `ImportError` primero, luego 4 `passed` tras implementar — el proceso CC_00003 se validó en la práctica
+- Usar `conftest.py` para cargar `.env` en pytest fue la solución limpia al problema de variables de entorno — evitó contaminar `supabase_client.py` con lógica de carga
+- Detectar que `${SUPABASE_ACCESS_TOKEN}` en `.mcp.json` no se expande (se pasa literal) — llevó a la solución correcta: `--access-token` como flag explícito en `.mcp.json` gitignoreado
+- Preguntar al usuario antes de scaffoldear Next.js (100+ archivos) fue la decisión correcta — el Bloque 5 se difirió sin fricción
+- Refactorizar `supabase_client.py` para leer tablas desde `config.yaml` con PyYAML mantuvo los 4 tests en verde — el test es el árbitro del refactor
+
+**⚠️ Lo que no funcionó / fricción encontrada:**
+- El MCP Supabase requirió 3 reinicios de Claude Code para conectarse correctamente: primero `${VAR}` no se expandía, luego el project-ref estaba desactualizado — el setup de MCP es más frágil de lo esperado en Windows
+- `settings.local.json` no acepta `mcpServers` (schema validation falla) — la documentación oficial no lo aclara claramente; la solución es `.mcp.json` separado
+- `supabase.create_client()` valida formato JWT antes de llamar a la API — el test de key inválida requirió un JWT sintéticamente válido (`eyJ...`) para llegar al error de red real
+- `python-dotenv` no estaba instalado en el venv al momento de los tests — dependencia implícita que debió declararse en TSK-1-04
+
+**💡 Decisiones clave tomadas:**
+- `.mcp.json` gitignoreado con token literal — más confiable que interpolación de variables en Windows
+- `engine/tests/conftest.py` como punto central de carga de `.env` para todos los tests del engine
+- Bloque 5 (web/) diferido a primera etapa con componentes reales — crear Next.js sin pantallas que mostrar es desperdicio
+- Git Flow completo (`feat/* → dev → test → prod`) se activa en Etapa 2.1; para Etapas 1.x el código va directamente a `main`
+- TSK-1-29 y TSK-1-30 no ejecutados en esta sesión — próxima sesión debe empezar por `/update-index` y `/close-stage` antes de cualquier otra acción
+

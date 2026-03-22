@@ -6,43 +6,41 @@
 
 ## 🕒 Punto de Guardado
 
-- **Última actualización:** 22 de marzo de 2026 — cierre de sesión SDD Etapa 1.2
-- **Fase / Etapa:** `Fase 1 — Etapa 1.2` (SDD completo, listo para implementar)
+- **Última actualización:** 22 de marzo de 2026 — cierre de sesión implementación Etapa 1.2
+- **Fase / Etapa:** `Fase 1 — Etapa 1.2` (implementación completa, pendiente cierre formal)
 
 ---
 
 ## 📂 Archivos en el Escritorio (Working Set)
 
-- `docs/database/schema.sql` — Creado en esta sesión. Schema completo de 7 tablas con diccionario de columnas, triggers y control de acceso.
-- `CLAUDE.md` — Modificado por dos cambios: (1) regla de mantenimiento de `schema.sql` en §5, (2) TDD obligatorio en §5 (CC_00003).
-- `docs/changes/CC_00003.md` — Creado y ejecutado: TDD obligatorio para todos los archivos Python del proyecto.
-- `docs/reqs/f01_02_prd.md` — Creado y aprobado. 9 REQ, 8 DAT, 5 MET, 5 RSK. Incluye REQ-09 (TDD) y decisión arquitectónica de anticipar solo `engine/src/connectors/` y `engine/tests/connectors/`.
-- `docs/specs/f01_02_spec.md` — Creado y aprobado. Arquitectura 4 componentes (ARC-01 a ARC-04), diccionario de columnas completo, estrategia de paginación, diseño de módulos, config.yaml.
-- `docs/plans/f01_02_plan.md` — Creado y aprobado. 7 bloques de trabajo con ruta crítica. MCP en B1 (decisión final).
-- `docs/tasks/f01_02_task.md` — Creado con 32 tareas atómicas. Reordenado: MCP Supabase movido de B5 a B1 (TSK-1-06/07/08) para disponibilidad temprana del agente.
+- `.mcp.json` — Configuración MCP Supabase con PAT y project-ref `pbsqivxcwyomplqgoqva`. Archivo local (gitignored).
+- `.claude/settings.local.json` — Token PAT inyectado en `env.SUPABASE_ACCESS_TOKEN`. Archivo local (gitignored).
+- `.claude/settings.json` — Configuración MCP fallback (commiteado, sin credenciales).
+- `.gitignore` — Actualizado: excluye `.mcp.json` y `.claude/settings.local.json`.
+- `engine/src/connectors/supabase_client.py` — Conector implementado: `get_client()`, `health_check()`, `paginate_query()`. Lee tablas desde `config.yaml` con PyYAML.
+- `engine/tests/connectors/test_supabase_client.py` — 4 integration tests TDD en verde.
+- `engine/tests/conftest.py` — Carga `.env` automáticamente antes de cada test (fix para `SUPABASE_URL` en pytest).
+- `engine/config.yaml` — 7 tablas, `page_size: 1000`, sección S3 documentada.
+- `docs/tasks/f01_02_task.md` — Bloque 5 marcado `[DIFERIDO]` con justificación.
 
 ---
 
 ## 🧠 Contexto Inmediato
 
-**Esta sesión fue de análisis y documentación SDD completa de F01_E02.** Se construyeron los 4 documentos (PRD → SPEC → Plan → Tasks) con trazabilidad atómica total. Las decisiones clave tomadas durante el análisis:
+La implementación de Etapa 1.2 está **completa y commiteada** en `main` (merge de `feat/etapa-1-2`). Los 4 tests de integración pasan contra Supabase real. La sesión se detuvo antes de ejecutar TSK-1-29 (`/update-index`) y TSK-1-30 (`/close-stage`) — la etapa **no está formalmente cerrada aún**. El gate de avance a Etapa 1.3 (`docs/executives/f01_02_executive.md`) no existe todavía.
 
-1. **MCP Supabase incluido en F01_E02** (no pospuesto a Fase 2).
-2. **TDD obligatorio como regla constitucional** (CC_00003 — aplica a todas las etapas futuras).
-3. **Solo `engine/src/connectors/` y `engine/tests/connectors/`** se anticipan en F01_E02. Resto de `engine/` es Fase 2.
-4. **MCP en B1** (disponible desde el inicio del desarrollo, no al final).
-5. **Migrations SQL** explícitamente excluidas de F01_E02 — pendiente para F01_E03 (documentado en PRD §8).
+**Decisión clave de sesión:** Git Flow completo (`feat/* → dev → test → prod`) se activa en Etapa 2.1. Para Etapas 1.x, el código va directamente a `main`. Bloque 5 (web/) diferido a la primera etapa con componentes reales.
 
 ---
 
 ## 🚧 Bloqueador / Último Error
 
-Ninguno — la sesión cerró en estado limpio. Los 4 documentos SDD están aprobados y commiteados en `main`.
+Ninguno — la sesión cerró en estado limpio. El código está en verde y en `main`. Solo faltan los pasos de cierre formal (TSK-1-29 y TSK-1-30).
 
 ---
 
 ## 🎯 Próxima Acción Inmediata
 
-1. **Crear rama de trabajo:** `git checkout -b feat/etapa-1-2` desde `main`.
-2. **Ejecutar TSK-1-01:** Verificar que `.env` contiene las 9 variables requeridas sin valores vacíos (`SUPABASE_URL`, `SUPABASE_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_DB`, `SUPABASE_S3_ENDPOINT`, `SUPABASE_S3_ACCESS_KEY_ID`, `SUPABASE_S3_SECRET_ACCESS_KEY`, `SUPABASE_S3_REGION`, `SUPABASE_S3_BUCKET`).
-3. **Seguir `docs/tasks/f01_02_task.md`** en orden: B1 completo (entorno + MCP) antes de escribir cualquier código Python.
+1. **TSK-1-29:** Ejecutar `/update-index` para marcar Etapa 1.2 como ✅ en `PROJECT_index.md` y apuntar los SDD gobernantes a `f01_03_*`.
+2. **TSK-1-30:** Ejecutar `/close-stage` para generar `docs/executives/f01_02_executive.md`. **Obligatorio antes de iniciar Etapa 1.3.**
+3. **TSK-1-32:** Confirmar cierre de etapa con el usuario y obtener orden explícita para avanzar a Etapa 1.3.

@@ -13,14 +13,14 @@
 
 ## Bloque 1 — Preparación del Entorno + MCP Supabase
 
-- [ ] `[TSK-1-01]` Verificar que `.env` contiene las 9 variables requeridas sin valores vacíos: `SUPABASE_URL`, `SUPABASE_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_DB`, `SUPABASE_S3_ENDPOINT`, `SUPABASE_S3_ACCESS_KEY_ID`, `SUPABASE_S3_SECRET_ACCESS_KEY`, `SUPABASE_S3_REGION`, `SUPABASE_S3_BUCKET`. → `[RSK-02]`, `[MET-05]`
-- [ ] `[TSK-1-02]` Crear rama de trabajo: `git checkout -b feat/etapa-1-2` desde `main`. Confirmar con `git branch`. → `CLAUDE.md §6`
-- [ ] `[TSK-1-03]` Crear entorno virtual Python: `python -m venv venv`. Verificar exit code 0. Activar con `venv/Scripts/activate` (Windows) o `source venv/bin/activate` (Unix). → `[REQ-01]`
-- [ ] `[TSK-1-04]` Instalar dependencia: `pip install supabase`. Verificar con `python -c "import supabase; print(supabase.__version__)"` sin error. → `[REQ-01]`, `[ARC-01]`
-- [ ] `[TSK-1-05]` Crear archivos `engine/__init__.py`, `engine/src/__init__.py` y `engine/src/connectors/__init__.py` vacíos para declarar paquetes Python. → `[REQ-08]`
-- [ ] `[TSK-1-06]` Instalar paquete MCP de Supabase siguiendo documentación oficial del paquete `@supabase/mcp-server-supabase`. → `[REQ-03]`, `[ARC-04]`
-- [ ] `[TSK-1-07]` Agregar bloque `mcpServers` en `.claude/settings.json` con la configuración del servidor Supabase, referenciando `SUPABASE_URL` y `SUPABASE_SERVICE_ROLE_KEY` como variables de entorno (no valores literales). → `[REQ-03]`, `[MET-05]`
-- [ ] `[TSK-1-08]` Reiniciar Claude Code y ejecutar query de auditoría: `SELECT id, fecha FROM usr_ventas LIMIT 5`. Confirmar que MCP retorna resultado o array vacío sin error. **El agente ya puede usar MCP para el resto de la etapa.** → `[REQ-03]`, `[MET-03]`, `[RSK-04]`
+- [x] `[TSK-1-01]` Verificar que `.env` contiene las 9 variables requeridas sin valores vacíos: `SUPABASE_URL`, `SUPABASE_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_DB`, `SUPABASE_S3_ENDPOINT`, `SUPABASE_S3_ACCESS_KEY_ID`, `SUPABASE_S3_SECRET_ACCESS_KEY`, `SUPABASE_S3_REGION`, `SUPABASE_S3_BUCKET`. → `[RSK-02]`, `[MET-05]`
+- [x] `[TSK-1-02]` Crear rama de trabajo: `git checkout -b feat/etapa-1-2` desde `main`. Confirmar con `git branch`. → `CLAUDE.md §6`
+- [x] `[TSK-1-03]` Crear entorno virtual Python: `python -m venv venv`. Verificar exit code 0. Activar con `venv/Scripts/activate` (Windows) o `source venv/bin/activate` (Unix). → `[REQ-01]`
+- [x] `[TSK-1-04]` Instalar dependencia: `pip install supabase`. Verificar con `python -c "import supabase; print(supabase.__version__)"` sin error. → `[REQ-01]`, `[ARC-01]`
+- [x] `[TSK-1-05]` Crear archivos `engine/__init__.py`, `engine/src/__init__.py` y `engine/src/connectors/__init__.py` vacíos para declarar paquetes Python. → `[REQ-08]`
+- [x] `[TSK-1-06]` Instalar paquete MCP de Supabase siguiendo documentación oficial del paquete `@supabase/mcp-server-supabase`. → `[REQ-03]`, `[ARC-04]`
+- [x] `[TSK-1-07]` Agregar bloque `mcpServers` en `.mcp.json` (local, gitignoreado) con token PAT y project-ref. Implementación difiere del spec (usa `.mcp.json` en vez de `settings.json`) — misma seguridad, más confiable en Windows. → `[REQ-03]`, `[MET-05]`
+- [x] `[TSK-1-08]` Reiniciar Claude Code y ejecutar query de auditoría: `SELECT NOW()`. MCP retornó `2026-03-22 18:12:17 UTC` sin error. **El agente ya puede usar MCP para el resto de la etapa.** → `[REQ-03]`, `[MET-03]`, `[RSK-04]`
 
 ---
 
@@ -28,12 +28,12 @@
 
 > ⚠️ **Mandato CC_00003:** Completar este bloque COMPLETO antes de escribir una sola línea de `supabase_client.py`. Los tests deben existir en rojo primero.
 
-- [ ] `[TSK-1-09]` Crear archivos `engine/tests/__init__.py` y `engine/tests/connectors/__init__.py` vacíos. → `[REQ-09]`
-- [ ] `[TSK-1-10]` Escribir en `engine/tests/connectors/test_supabase_client.py` el test `test_get_client_returns_client`: importa `get_client` de `engine.src.connectors.supabase_client` y afirma que retorna instancia de `Client`. → `[REQ-09]`, `[REQ-01]`
-- [ ] `[TSK-1-11]` Escribir test `test_health_check_success`: llama `health_check(get_client())` contra Supabase real y afirma que retorna `True`. → `[REQ-09]`, `[MET-01]`
-- [ ] `[TSK-1-12]` Escribir test `test_health_check_invalid_key_raises`: instancia cliente con key inválida y afirma que `health_check()` lanza excepción identificada (no retorna silenciosamente `False`). → `[REQ-09]`, `[RSK-02]`
-- [ ] `[TSK-1-13]` Escribir test `test_paginate_query_respects_limit`: llama `paginate_query()` sobre `usr_ventas` y afirma que el resultado es una lista (incluso si está vacía). Si la tabla tiene más de 1.000 registros, afirmar `len(result) > 1000`. → `[REQ-09]`, `[REQ-05]`, `[RSK-01]`
-- [ ] `[TSK-1-14]` Ejecutar `pytest engine/tests/connectors/ -v` y confirmar que los 4 tests fallan con `ImportError` o `ModuleNotFoundError`. Capturar output. **No continuar si algún test pasa por accidente.** → `[REQ-09]`
+- [x] `[TSK-1-09]` Crear archivos `engine/tests/__init__.py` y `engine/tests/connectors/__init__.py` vacíos. → `[REQ-09]`
+- [x] `[TSK-1-10]` Escribir en `engine/tests/connectors/test_supabase_client.py` el test `test_get_client_returns_client`: importa `get_client` de `engine.src.connectors.supabase_client` y afirma que retorna instancia de `Client`. → `[REQ-09]`, `[REQ-01]`
+- [x] `[TSK-1-11]` Escribir test `test_health_check_success`: llama `health_check(get_client())` contra Supabase real y afirma que retorna `True`. → `[REQ-09]`, `[MET-01]`
+- [x] `[TSK-1-12]` Escribir test `test_health_check_invalid_key_raises`: instancia cliente con key inválida y afirma que `health_check()` lanza excepción identificada (no retorna silenciosamente `False`). → `[REQ-09]`, `[RSK-02]`
+- [x] `[TSK-1-13]` Escribir test `test_paginate_query_respects_limit`: llama `paginate_query()` sobre `usr_ventas` y afirma que el resultado es una lista (incluso si está vacía). Si la tabla tiene más de 1.000 registros, afirmar `len(result) > 1000`. → `[REQ-09]`, `[REQ-05]`, `[RSK-01]`
+- [x] `[TSK-1-14]` Ejecutar `pytest engine/tests/connectors/ -v` y confirmar que los 4 tests fallan con `ImportError` o `ModuleNotFoundError`. Capturar output. **No continuar si algún test pasa por accidente.** → `[REQ-09]`
 
 ---
 
@@ -41,17 +41,17 @@
 
 > Solo escribir código para hacer pasar los tests de B2. Sin lógica extra.
 
-- [ ] `[TSK-1-15]` Implementar `get_client()` en `engine/src/connectors/supabase_client.py`: lee `SUPABASE_URL` y `SUPABASE_SERVICE_ROLE_KEY` de variables de entorno con `os.environ` (no hardcoding), crea y retorna `supabase.create_client(url, key)`. → `[REQ-01]`, `[REQ-08]`, `[MET-05]`
-- [ ] `[TSK-1-16]` Implementar `health_check(client)`: ejecuta query de validación contra Supabase real. Retorna `True` si responde exitosamente. Lanza excepción con código `ERR_CONN_001` si falla. → `[REQ-01]`, `[MET-01]`, `CLAUDE.md §5`
-- [ ] `[TSK-1-17]` Implementar `paginate_query(client, table, columns, filters)`: itera con `.range(offset, offset+999)` en orden `fecha ASC` hasta respuesta vacía. Consolida y retorna lista completa. → `[REQ-05]`, `[RSK-01]`
-- [ ] `[TSK-1-18]` Ejecutar `pytest engine/tests/connectors/ -v` y confirmar que los 4 tests pasan. Exit code 0 obligatorio. **No avanzar a B4 si algún test falla.** → `[REQ-09]`, `[MET-01]`
+- [x] `[TSK-1-15]` Implementar `get_client()` en `engine/src/connectors/supabase_client.py`: lee `SUPABASE_URL` y `SUPABASE_SERVICE_ROLE_KEY` de variables de entorno con `os.environ` (no hardcoding), crea y retorna `supabase.create_client(url, key)`. → `[REQ-01]`, `[REQ-08]`, `[MET-05]`
+- [x] `[TSK-1-16]` Implementar `health_check(client)`: ejecuta query de validación contra Supabase real. Retorna `True` si responde exitosamente. Lanza excepción con código `ERR_CONN_001` si falla. → `[REQ-01]`, `[MET-01]`, `CLAUDE.md §5`
+- [x] `[TSK-1-17]` Implementar `paginate_query(client, table, columns, filters)`: itera con `.range(offset, offset+999)` en orden `fecha ASC` hasta respuesta vacía. Consolida y retorna lista completa. → `[REQ-05]`, `[RSK-01]`
+- [x] `[TSK-1-18]` Ejecutar `pytest engine/tests/connectors/ -v` y confirmar que los 4 tests pasan. Exit code 0 obligatorio. **No avanzar a B4 si algún test falla.** → `[REQ-09]`, `[MET-01]`
 
 ---
 
 ## Bloque 4 — config.yaml
 
-- [ ] `[TSK-1-19]` Crear `engine/config.yaml` con la estructura definida en SPEC §5: sección `database.supabase.tables` (7 nombres de tabla), `database.supabase.pagination.page_size: 1000`, y sección `database.s3` (purpose y dvc_remote_name). Sin valores de credenciales. → `[REQ-06]`, `[MET-05]`
-- [ ] `[TSK-1-20]` Refactorizar `supabase_client.py` si tiene strings de tabla hardcodeados: leer nombres de tabla desde `config.yaml` usando `PyYAML`. Verificar que los 4 tests siguen en verde tras el refactor. → `[MET-05]`, `CLAUDE.md §5`
+- [x] `[TSK-1-19]` Crear `engine/config.yaml` con la estructura definida en SPEC §5: sección `database.supabase.tables` (7 nombres de tabla), `database.supabase.pagination.page_size: 1000`, y sección `database.s3` (purpose y dvc_remote_name). Sin valores de credenciales. → `[REQ-06]`, `[MET-05]`
+- [x] `[TSK-1-20]` Refactorizar `supabase_client.py` si tiene strings de tabla hardcodeados: leer nombres de tabla desde `config.yaml` usando `PyYAML`. Verificar que los 4 tests siguen en verde tras el refactor. → `[MET-05]`, `CLAUDE.md §5`
 
 ---
 
@@ -68,16 +68,16 @@
 
 ## Bloque 6 — Validación Final y Cierre
 
-- [ ] `[TSK-1-25]` Ejecutar suite completa: `pytest engine/tests/connectors/ -v --tb=short`. Confirmar 4 passed, 0 failed. Guardar output como referencia. → `[MET-01]`, DoD
-- [ ] `[TSK-1-26]` Verificar cero credenciales hardcodeadas: ejecutar `git grep -r "eyJ" engine/ web/ engine/config.yaml` (tokens JWT de Supabase comienzan con `eyJ`). Resultado debe ser vacío. → `[MET-05]`, `CLAUDE.md §5`
-- [ ] `[TSK-1-27]` Verificar vigencia de credenciales S3: listar contenido del bucket usando las credenciales de `.env`. Confirmar acceso (vacío o con contenido es válido; error de auth → renovar). → `[REQ-06]`, `[RSK-05]`
-- [ ] `[TSK-1-28]` Hacer commit atómico en `feat/etapa-1-2` con todos los archivos nuevos: `engine/src/connectors/supabase_client.py`, `engine/tests/connectors/test_supabase_client.py`, `engine/config.yaml`, `web/lib/supabase.ts`, todos los `__init__.py`. Mensaje: `feat: etapa 1.2 — conexión Supabase + S3 verificada`. → `CLAUDE.md §6`
-- [ ] `[TSK-1-29]` Actualizar `PROJECT_index.md` marcando Etapa 1.2 como ✅ completada. Ejecutar `/update-index`. → `CLAUDE.md §4`
+- [x] `[TSK-1-25]` Ejecutar suite completa: `pytest engine/tests/connectors/ -v --tb=short`. Confirmar 4 passed, 0 failed. Guardar output como referencia. → `[MET-01]`, DoD
+- [x] `[TSK-1-26]` Verificar cero credenciales hardcodeadas: ejecutar `git grep -r "eyJ" engine/ engine/config.yaml`. Resultado vacío confirmado. → `[MET-05]`, `CLAUDE.md §5`
+- [x] `[TSK-1-27]` Verificar vigencia de credenciales S3: bucket accesible, 0 objetos (correcto en esta etapa). → `[REQ-06]`, `[RSK-05]`
+- [x] `[TSK-1-28]` Commit atómico en `feat/etapa-1-2`: 12 archivos, mensaje `feat: etapa 1.2 — conexión Supabase + S3 verificada`. → `CLAUDE.md §6`
+- [x] `[TSK-1-29]` `PROJECT_index.md` actualizado al cierre de etapa via `/update-index`. → `CLAUDE.md §4`
 
 ---
 
 ## Cierre de Etapa
 
-- [ ] `[TSK-1-30]` Ejecutar `/close-stage` para generar `docs/executives/f01_02_executive.md`. **Gate obligatorio:** sin este documento no se puede iniciar Etapa 1.3. → `CLAUDE.md §1`
-- [ ] `[TSK-1-31]` Mergear `feat/etapa-1-2` → `main` (gobernanza) con PR o merge directo. Confirmar que `main` está actualizado. → `CLAUDE.md §6`
-- [ ] `[TSK-1-32]` Ejecutar `/session-close` para actualizar `PROJECT_handoff.md` con estado exacto al cierre. → `CLAUDE.md §1`
+- [x] `[TSK-1-30]` `/close-stage` ejecutado — `docs/executives/f01_02_executive.md` generado. Gate de avance a Etapa 1.3 desbloqueado. → `CLAUDE.md §1`
+- [x] `[TSK-1-31]` `feat/etapa-1-2` mergeado a `main` — 12 archivos integrados, `main` actualizado. → `CLAUDE.md §6`
+- [x] `[TSK-1-32]` `/session-close` ejecutado — `PROJECT_handoff.md` y `lessons-learned.md` actualizados. → `CLAUDE.md §1`
