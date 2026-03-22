@@ -70,3 +70,23 @@
 - `/code-review-demo` (skill customizado) preferido sobre `/simplify` genérico — se creará en Etapa 2.1
 - Un CC por cambio temático — CC_00001 (§6 CI/CD) y CC_00002 (§1 Protocolo) son independientes y correctamente separados
 
+### Sesión: 22 de marzo de 2026 (SDD completo de Etapa 1.2)
+
+**✅ Lo que funcionó bien:**
+- Hacer todo el análisis antes de escribir documentos evitó retrabajo — las 4 decisiones arquitectónicas clave (MCP en F01_E02, TDD obligatorio, solo `engine/src/connectors/`, migrations a F01_E03) quedaron claras antes del primer documento
+- El flujo PRD → SPEC → Plan → Tasks con revisión y aprobación en cada paso funcionó bien — el usuario detectó el problema del MCP en B5 antes de aprobar el Task List
+- Preguntar en series cortas y esperar respuesta antes de avanzar resultó más eficiente que hacer múltiples asunciones
+- CC_00003 (TDD obligatorio) fue detectado y gestionado correctamente antes de modificar CLAUDE.md — el gate de CC funcionó
+
+**⚠️ Lo que no funcionó / fricción encontrada:**
+- El MCP Supabase fue ubicado inicialmente en B5 (demasiado tarde) — el usuario lo detectó en revisión; el agente debió haberlo colocado en B1 desde el inicio al entender que es una herramienta de desarrollo activa, no un entregable
+- El PRD se actualizó varias veces durante la sesión de análisis (3 commits separados) — hubiera sido más limpio tener todas las decisiones antes de crear el documento
+
+**💡 Decisiones clave tomadas:**
+- TDD obligatorio para todos los archivos Python del proyecto (CC_00003) — integration tests, no mocks para conectores
+- `engine/src/connectors/` y `engine/tests/connectors/` anticipados en F01_E02; resto de `engine/` permanece en Fase 2
+- MCP Supabase configurado en B1 del Task List — el agente necesita acceso a la BD desde el inicio, no al final
+- Migrations SQL (versionamiento de schema) pospuestas a F01_E03 — documentado como deuda explícita en PRD §8
+- `docs/database/schema.sql` creado como fuente de verdad técnica del schema — regla de mantenimiento añadida a CLAUDE.md §5
+- Diccionario de columnas vive en la SPEC (no en un documento separado) — evita duplicación
+
