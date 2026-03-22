@@ -110,6 +110,14 @@ Este archivo define las leyes, límites y terreno de juego para cualquier Agente
 *   **Pushdown Operacional (SQL-First):** Las transformaciones pesadas de datos deben ejecutarse en la base de datos (SQL) siempre que sea posible, para evitar saturar la memoria local con DataFrames.
 *   **Prevención de Training-Serving Skew:** La misma función atómica en `src/` que se usa para limpiar/transformar datos en entrenamiento **debe invocarse exactamente igual** en inferencia. Prohibido duplicar lógica entre pipelines.
 *   **Documentación de Schema SQL:** Mantener `docs/database/schema.sql` en sincronía permanente con el esquema actual de Supabase. Después de ejecutar CREATE TABLE en Supabase, actualizar este archivo inmediatamente con el DDL completo, comentarios descriptivos de propósito y granularidad, triggers, y notas de mantenimiento. El schema es la fuente de verdad técnica para integraciones de ingesta y consultas.
+*   **TDD Obligatorio:** Todo archivo Python creado en cualquier etapa del proyecto debe seguir el ciclo Test-Driven Development: (1) escribir el test primero, (2) implementar el código mínimo para que pase, (3) refactorizar. Reglas específicas:
+    *   Los tests viven en `engine/tests/` con estructura de subcarpetas que espeja `engine/src/` (ej. `engine/tests/connectors/` para `engine/src/connectors/`).
+    *   **`engine/tests/` se anticipa junto con cada módulo nuevo** — no se crea código sin su test paralelo.
+    *   **Estándar para conectores e infraestructura:** Integration tests (prueba contra el servicio real). No mockear servicios externos en tests de conectores — un mock que pasa no garantiza que la credencial funcione.
+    *   Los integration tests de conectores forman parte del **CI Quality Gate** (implementar en Etapa 2.1).
+    *   Ningún módulo Python se considera "hecho" sin al menos un test de integración que valide el contrato de la función principal.
+
+> **Control de Cambio:** Regla TDD añadida por `CC_00003` (2026-03-22).
 
 ---
 
