@@ -9,6 +9,8 @@ build/
 
 # Secretos
 .env
+.claude/settings.local.json
+.mcp.json
 
 # Artefactos de IA (gestionados por DVC)
 *.pkl

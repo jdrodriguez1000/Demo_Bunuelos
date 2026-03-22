@@ -57,10 +57,12 @@
 
 ## Bloque 5 — Dashboard Next.js
 
-- [ ] `[TSK-1-21]` Instalar dependencia en `web/`: `npm install @supabase/supabase-js`. Verificar que aparece en `web/package.json`. → `[REQ-02]`, `[ARC-02]`
-- [ ] `[TSK-1-22]` Agregar al `.env` raíz del proyecto (o crear `web/.env.local`): `NEXT_PUBLIC_SUPABASE_URL` con el mismo valor que `SUPABASE_URL`, y `NEXT_PUBLIC_SUPABASE_ANON_KEY` con el mismo valor que `SUPABASE_KEY`. → `[REQ-02]`, `SPEC §3.3`
-- [ ] `[TSK-1-23]` Crear `web/lib/supabase.ts`: importa `createClient` de `@supabase/supabase-js`, lee `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_ANON_KEY` de `process.env`, exporta instancia única como `supabaseClient`. → `[REQ-02]`, `[ARC-02]`
-- [ ] `[TSK-1-24]` Validar conexión: ejecutar query de prueba a `usr_ventas` usando `supabaseClient`. Confirmar HTTP 200 o array vacío sin error 401/403. Si falla con 403 → revisar políticas RLS `[RSK-03]`. → `[REQ-02]`, `[MET-02]`
+> **[DIFERIDO — 2026-03-22]** El proyecto `web/` no existe aún. Scaffoldear Next.js en esta etapa crearía ~100 archivos sin valor verificable hasta que exista una pantalla real que consuma datos. Estas tareas se retoman en la primera etapa que produzca componentes de dashboard.
+
+- [DIFERIDO] `[TSK-1-21]` Instalar dependencia en `web/`: `npm install @supabase/supabase-js`. Verificar que aparece en `web/package.json`. → `[REQ-02]`, `[ARC-02]`
+- [DIFERIDO] `[TSK-1-22]` Agregar al `.env` raíz del proyecto (o crear `web/.env.local`): `NEXT_PUBLIC_SUPABASE_URL` con el mismo valor que `SUPABASE_URL`, y `NEXT_PUBLIC_SUPABASE_ANON_KEY` con el mismo valor que `SUPABASE_KEY`. → `[REQ-02]`, `SPEC §3.3`
+- [DIFERIDO] `[TSK-1-23]` Crear `web/lib/supabase.ts`: importa `createClient` de `@supabase/supabase-js`, lee `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_ANON_KEY` de `process.env`, exporta instancia única como `supabaseClient`. → `[REQ-02]`, `[ARC-02]`
+- [DIFERIDO] `[TSK-1-24]` Validar conexión: ejecutar query de prueba a `usr_ventas` usando `supabaseClient`. Confirmar HTTP 200 o array vacío sin error 401/403. Si falla con 403 → revisar políticas RLS `[RSK-03]`. → `[REQ-02]`, `[MET-02]`
 
 ---
 
