@@ -1,0 +1,22 @@
+# engine/config.yaml
+# Configuración global del Engine — Demo_Bunuelos
+# Secretos en .env. Este archivo es seguro para Git.
+
+database:
+  supabase:
+    pagination:
+      page_size: 1000        # Límite Supabase por query. No modificar sin revisar RSK-01.
+    tables:
+      ventas:       usr_ventas
+      produccion:   usr_produccion
+      inventario:   usr_inventario
+      clima:        usr_clima
+      festivos:     usr_festivos
+      ipc:          usr_ipc
+      publicidad:   usr_publicidad
+
+  s3:
+    # Valores reales en .env (SUPABASE_S3_*)
+    # Este bloque documenta las claves esperadas en config — sin valores sensibles.
+    purpose: dvc_model_storage   # Exclusivo para modelos .pkl versionados con DVC
+    dvc_remote_name: s3_models   # Nombre del remote DVC a configurar en Fase 2
