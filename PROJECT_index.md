@@ -89,3 +89,4 @@
 - **2026-03-22** — Git Flow completo (`feat/* → dev → test → prod`) se activa en Etapa 2.1. Para Etapas 1.x el código va directamente a `main`.
 - **2026-03-22** — Bloque 5 (web/) diferido: conexión Next.js → Supabase se implementa en la primera etapa que produzca componentes de dashboard reales.
 - **2026-03-22** — TDD obligatorio (CC_00003) validado en práctica: 4 tests en rojo → implementación → 4 tests en verde. Ciclo completo ejecutado correctamente.
+- **2026-03-22** — CC_00004 aprobado: indicador de progreso del proyecto añadido a la gobernanza. Metodología: `Avance = Σ (Etapas Cerradas / E_i) × (100% / N)`. N y E_i son dinámicos — leídos de `PROJECT_index.md` al cerrar cada etapa. Impacto: `/close-stage` ahora inyecta el indicador automáticamente en cada ejecutivo.

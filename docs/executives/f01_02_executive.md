@@ -64,4 +64,25 @@ Este trabajo es crítico porque sin un contrato de datos bien definido, el motor
 
 ---
 
+## 📈 Progreso del Proyecto
+
+**Avance General: 16.67%**
+
+| Fase | Etapas Totales | Etapas Cerradas | Peso | Aporte |
+|---|:---:|:---:|:---:|:---:|
+| 1 — Definiciones y Cimientos | 3 | 2 | 25% | 16.67% |
+| 2 — Ingeniería e Ingestión | 3 | 0 | 25% | 0% |
+| 3 — Modelado y Optimización | 3 | 0 | 25% | 0% |
+| 4 — Operación y Analítica | 3 | 0 | 25% | 0% |
+| **TOTAL** | **12** | **2** | **100%** | **16.67%** |
+
+**¿Cómo se calcula?**
+- El proyecto tiene **N = 4 fases** → cada fase aporta `100% / 4 = 25%`
+- La Fase 1 tiene 3 etapas y 2 están cerradas → `2/3 × 25% = 16.67%`
+- Una etapa cuenta como cerrada solo cuando su Resumen Ejecutivo existe en el repositorio.
+- Si en el futuro se agregan fases o etapas, el porcentaje puede ajustarse a la baja — eso refleja un alcance más amplio, no un retroceso.
+
+---
+
 *Documento generado con `/close-stage` — Para detalles técnicos, consultar `docs/specs/f01_02_spec.md`*
+*Sección de progreso añadida por `CC_00004` (2026-03-22).*

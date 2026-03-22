@@ -209,3 +209,14 @@ Este archivo define las leyes, límites y terreno de juego para cualquier Agente
 *   **KPI Principal:** `Overall Quality` — resume precisión del modelo e integridad de datos. Es el indicador de salud oficial del proyecto.
 *   **Revisión Mensual Obligatoria:** Si el MAPE supera el 15% en producción, se realiza diagnóstico de Data Drift o fallo estructural del modelo.
 *   **Umbral de Acción Crítica:** Si el MAPE supera el **25%** durante **2 días hábiles consecutivos**, el equipo de IA ejecuta diagnóstico de emergencia y comunica resultados al Panel de Expertos.
+*   **Indicador de Progreso del Proyecto:** Cada Resumen Ejecutivo (`docs/executives/`) incluye obligatoriamente el porcentaje de avance global del proyecto, calculado con la siguiente metodología:
+    *   `N` = número total de fases (leído de `PROJECT_index.md` al momento del cierre — variable por proyecto).
+    *   `E_i` = número total de etapas de la fase `i` (variable, puede crecer durante el proyecto).
+    *   **Peso de cada fase** = `100% / N`
+    *   **Avance de fase `i`** = `(Etapas Cerradas en i / E_i) × (100% / N)`
+    *   **Progreso Total** = `Σ Avance de cada fase`
+    *   Una etapa cuenta como cerrada **únicamente** si existe su archivo `docs/executives/f[F]_[E]_executive.md`.
+    *   **Regla de Alcance Dinámico:** Si se agregan fases o etapas, el porcentaje puede bajar aunque no se haya revertido trabajo. Esto es correcto. El próximo ejecutivo cerrado debe incluir una nota explicativa al cliente:
+        > ⚠️ Nota de Alcance: El avance bajó de X% a Y% porque se incorporaron Z fases/etapas nuevas. El trabajo completado no cambió — el alcance del proyecto creció.
+
+> **Control de Cambio:** Indicador de progreso añadido por `CC_00004` (2026-03-22).

@@ -36,7 +36,26 @@ Lee los siguientes archivos en orden:
 
 1. `docs/tasks/f[F]_[E]_task.md` — ¿Qué tareas quedaron `[x]` y cuáles `[ ]`?
 2. `docs/reqs/f[F]_[E]_prd.md` — ¿Cuáles eran los objetivos y métricas de éxito?
-3. `PROJECT_index.md` — Estado actual del proyecto
+3. `PROJECT_index.md` — Estado actual del proyecto y **número total de fases (N)**
+
+**Calcular el indicador de progreso (CC_00004):**
+
+Con `PROJECT_index.md` en mano, calcula el progreso ANTES de escribir el ejecutivo:
+
+```
+N = número total de fases listadas en PROJECT_index.md (variable por proyecto)
+Peso por fase = 100% / N
+
+Para cada fase i:
+  E_i = número de etapas definidas en esa fase
+  C_i = número de etapas con ejecutivo en docs/executives/ (etapas cerradas)
+  Avance_i = (C_i / E_i) × (100% / N)
+
+Progreso Total = Σ Avance_i de todas las fases
+```
+
+**Regla de Alcance Dinámico:** Si el progreso calculado es MENOR al que figuraba en el ejecutivo anterior (porque se añadieron fases o etapas), incluir nota obligatoria en el ejecutivo:
+> ⚠️ Nota de Alcance: El avance bajó de X% a Y% porque se incorporaron Z fases/etapas nuevas. El trabajo completado no cambió — el alcance del proyecto creció.
 
 Con esta información, construye mentalmente:
 - **Logros:** tareas completadas que generan valor visible
@@ -127,6 +146,26 @@ por qué es importante y qué necesita el equipo para empezar.]
 | Indicador | Meta | Resultado | Estado |
 |---|---|---|---|
 | [MET-XX en lenguaje simple] | [Valor objetivo] | [Valor obtenido] | ✅ / ⚠️ / ❌ |
+
+---
+
+## 📈 Progreso del Proyecto
+
+**Avance General: [X]%**
+
+| Fase | Etapas Totales | Etapas Cerradas | Peso | Aporte |
+|---|:---:|:---:|:---:|:---:|
+| [Fase 1 — Nombre] | [E_1] | [C_1] | [100%/N] | [C_1/E_1 × 100%/N] |
+| [Fase 2 — Nombre] | [E_2] | [C_2] | [100%/N] | [C_2/E_2 × 100%/N] |
+| ... | ... | ... | ... | ... |
+| **TOTAL** | **[ΣE]** | **[ΣC]** | **100%** | **[X]%** |
+
+**¿Cómo se calcula?**
+- El proyecto tiene **N = [N] fases** → cada fase aporta `100% / N = [100%/N]`
+- Solo cuentan como cerradas las etapas con Resumen Ejecutivo en el repositorio.
+- Si en el futuro se agregan fases o etapas, el porcentaje puede ajustarse — eso refleja más alcance, no un retroceso.
+
+[Si el progreso bajó respecto al ejecutivo anterior, incluir aquí la nota de alcance dinámico]
 
 ---
 
