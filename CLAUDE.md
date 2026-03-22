@@ -109,6 +109,7 @@ Este archivo define las leyes, límites y terreno de juego para cualquier Agente
 *   **DVC Obligatorio:** Prohibido subir datasets o modelos entrenados (`.pkl`) al repositorio Git. Todo artefacto pesado de IA debe versionarse con DVC y almacenarse en S3.
 *   **Pushdown Operacional (SQL-First):** Las transformaciones pesadas de datos deben ejecutarse en la base de datos (SQL) siempre que sea posible, para evitar saturar la memoria local con DataFrames.
 *   **Prevención de Training-Serving Skew:** La misma función atómica en `src/` que se usa para limpiar/transformar datos en entrenamiento **debe invocarse exactamente igual** en inferencia. Prohibido duplicar lógica entre pipelines.
+*   **Documentación de Schema SQL:** Mantener `docs/database/schema.sql` en sincronía permanente con el esquema actual de Supabase. Después de ejecutar CREATE TABLE en Supabase, actualizar este archivo inmediatamente con el DDL completo, comentarios descriptivos de propósito y granularidad, triggers, y notas de mantenimiento. El schema es la fuente de verdad técnica para integraciones de ingesta y consultas.
 
 ---
 
