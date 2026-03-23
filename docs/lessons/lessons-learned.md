@@ -112,3 +112,26 @@
 - Git Flow completo (`feat/* → dev → test → prod`) se activa en Etapa 2.1; para Etapas 1.x el código va directamente a `main`
 - TSK-1-29 y TSK-1-30 no ejecutados en esta sesión — próxima sesión debe empezar por `/update-index` y `/close-stage` antes de cualquier otra acción
 
+---
+
+## Fase 1 — Etapa 1.3: Definición del Data Contract
+
+### Sesión: 23 de marzo de 2026 (Análisis y SDD completo de Etapa 1.3)
+
+**✅ Lo que funcionó bien:**
+- El enfoque de análisis puro antes de escribir documentos evitó retrabajo significativo — múltiples rondas de preguntas clarificaron el diseño antes del primer documento
+- La distinción entre 3 capas de validación (crear contrato / validar estructura / validar calidad) fue una decisión que mejoró el alcance del PRD con input del usuario
+- Detectar proactivamente la discrepancia `config.yaml` vs `schema.sql` (3 tablas incorrectas) antes de la implementación evita un bug difícil de rastrear
+- El flujo PRD → SPEC → Plan → Tasks funcionó con trazabilidad completa — cada documento referencia los tags del anterior
+
+**⚠️ Lo que no funcionó / fricción encontrada:**
+- La fórmula de `demanda_teorica` requirió múltiples iteraciones — el concepto de análisis horario (no solo diario) no fue capturado en el primer intento
+- El conteo "7 tablas" se hardcodeó inicialmente en el PRD — el usuario corrigió que el número es dinámico; el diseño correcto es "actualmente 7, extensible a N"
+- La ruta `contracts/` fue propuesta inicialmente como `docs/contracts/` — el usuario la corrigió a raíz del proyecto
+
+**💡 Decisiones clave tomadas:**
+- `demanda_teorica` es una variable calculada (no almacenada) con lógica horaria en Regla 2: buscar `hora_ultima_venta` del día agotado y comparar con ventas desde esa hora en días similares del mismo día de semana (90 días, sin festivos)
+- Contrato dinámico: arrays YAML extensibles a N tablas sin cambio de formato; solo las mandatorias tienen restricción de eliminación
+- Persistencia híbrida: Supabase para metadatos/auditoría + S3/DVC para el artefacto YAML — el Engine descarga desde S3 en startup
+- Trigger en Supabase (`activate_contract_version`) desactiva versiones anteriores automáticamente al insertar una nueva con `is_active=true`
+- La validación de festivos en Regla 2 se documenta como parámetro (`exclude_holidays: true`) pero no se implementa en Etapa 1.3 — tabla de festivos es deuda de Etapa 2.3

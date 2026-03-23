@@ -6,41 +6,43 @@
 
 ## 🕒 Punto de Guardado
 
-- **Última actualización:** 22 de marzo de 2026 — cierre de sesión implementación Etapa 1.2
-- **Fase / Etapa:** `Fase 1 — Etapa 1.2` (implementación completa, pendiente cierre formal)
+- **Última actualización:** 23 de marzo de 2026 — cierre de sesión documentación Etapa 1.3
+- **Fase / Etapa:** `Fase 1 — Etapa 1.3` (SDD completo y aprobado — implementación pendiente de inicio)
 
 ---
 
 ## 📂 Archivos en el Escritorio (Working Set)
 
-- `.mcp.json` — Configuración MCP Supabase con PAT y project-ref `pbsqivxcwyomplqgoqva`. Archivo local (gitignored).
-- `.claude/settings.local.json` — Token PAT inyectado en `env.SUPABASE_ACCESS_TOKEN`. Archivo local (gitignored).
-- `.claude/settings.json` — Configuración MCP fallback (commiteado, sin credenciales).
-- `.gitignore` — Actualizado: excluye `.mcp.json` y `.claude/settings.local.json`.
-- `engine/src/connectors/supabase_client.py` — Conector implementado: `get_client()`, `health_check()`, `paginate_query()`. Lee tablas desde `config.yaml` con PyYAML.
-- `engine/tests/connectors/test_supabase_client.py` — 4 integration tests TDD en verde.
-- `engine/tests/conftest.py` — Carga `.env` automáticamente antes de cada test (fix para `SUPABASE_URL` en pytest).
-- `engine/config.yaml` — 7 tablas, `page_size: 1000`, sección S3 documentada.
-- `docs/tasks/f01_02_task.md` — Bloque 5 marcado `[DIFERIDO]` con justificación.
+- `docs/reqs/f01_03_prd.md` — PRD aprobado. Define 10 REQs, variable objetivo `demanda_teorica` con 2 reglas, 7 tablas (2 mandatorias + 5 opcionales), inmutabilidad de versiones, persistencia híbrida Supabase + S3.
+- `docs/specs/f01_03_spec.md` — SPEC aprobada. DDL completo de tabla `contracts` (con partial unique index + trigger), firmas de 11 funciones Python, esquema YAML del contrato, diccionario de columnas de las 7 tablas, discrepancia `config.yaml` vs `schema.sql` documentada.
+- `docs/plans/f01_03_plan.md` — Plan aprobado. 7 bloques de trabajo (B2 y B3 paralelizables), ruta crítica definida, 9 tests de integración planificados, DoD de 14 ítems.
+- `docs/tasks/f01_03_task.md` — Task list aprobada. 39 tareas atómicas (TSK-1-01 a TSK-1-39), todas en estado `[ ]` — ninguna ejecutada aún.
+- `PROJECT_index.md` — Actualizado: SDD de Etapa 1.3 marcados como ✅ Aprobado. Nota de sesión añadida.
+- `contracts/` — Carpeta NO creada aún (es tarea TSK-1-04 de la implementación).
 
 ---
 
 ## 🧠 Contexto Inmediato
 
-La implementación de Etapa 1.2 está **completa y commiteada** en `main` (merge de `feat/etapa-1-2`). Los 4 tests de integración pasan contra Supabase real. La sesión se detuvo antes de ejecutar TSK-1-29 (`/update-index`) y TSK-1-30 (`/close-stage`) — la etapa **no está formalmente cerrada aún**. El gate de avance a Etapa 1.3 (`docs/executives/f01_02_executive.md`) no existe todavía.
+Esta sesión fue exclusivamente de **documentación SDD** — no se escribió ni ejecutó código. Los 4 documentos (PRD → SPEC → Plan → Tasks) fueron creados, refinados y aprobados por el usuario. El contrato `data_contract.yaml` aún no existe en el repositorio — se creará en el Bloque 2 de la implementación.
 
-**Decisión clave de sesión:** Git Flow completo (`feat/* → dev → test → prod`) se activa en Etapa 2.1. Para Etapas 1.x, el código va directamente a `main`. Bloque 5 (web/) diferido a la primera etapa con componentes reales.
+**Decisiones clave de diseño acordadas:**
+- `demanda_teorica` se calcula con 2 reglas: si `unidades_sobrantes > 0` → `= unidades_vendidas`; si `= 0` → inferencia horaria con días similares (90 días lookback, mismo día semana, sin festivos).
+- Tabla `contracts` en Supabase con partial unique index: solo 1 contrato activo por `pyme_id` en cualquier momento.
+- Módulos Python: `contract_loader.py` + `contract_validator.py` bajo `engine/src/contract/`, con TDD obligatorio (CC_00003).
+- `config.yaml` tiene 3 tablas incorrectas que deben sincronizarse con `schema.sql` (B6 del plan).
 
 ---
 
 ## 🚧 Bloqueador / Último Error
 
-Ninguno — la sesión cerró en estado limpio. El código está en verde y en `main`. Solo faltan los pasos de cierre formal (TSK-1-29 y TSK-1-30).
+Ninguno — la sesión cerró en estado limpio. Los 4 SDD están aprobados y `PROJECT_index.md` actualizado. La implementación puede iniciarse en la próxima sesión.
 
 ---
 
 ## 🎯 Próxima Acción Inmediata
 
-1. **TSK-1-29:** Ejecutar `/update-index` para marcar Etapa 1.2 como ✅ en `PROJECT_index.md` y apuntar los SDD gobernantes a `f01_03_*`.
-2. **TSK-1-30:** Ejecutar `/close-stage` para generar `docs/executives/f01_02_executive.md`. **Obligatorio antes de iniciar Etapa 1.3.**
-3. **TSK-1-32:** Confirmar cierre de etapa con el usuario y obtener orden explícita para avanzar a Etapa 1.3.
+1. **TSK-1-01:** Verificar que `docs/database/schema.sql` está sincronizado con Supabase real (vía MCP `list_tables` o query directa). Documentar discrepancias. → Prerequisito de todo lo demás.
+2. **TSK-1-02:** Validar acceso de escritura a S3: subir archivo de prueba usando credenciales `SUPABASE_S3_*` de `.env`. Confirmar éxito o documentar bloqueador.
+3. **TSK-1-03:** Verificar que el conector Supabase puede ejecutar DDL (`CREATE TABLE`) con service role key.
+4. **Si B1 está limpio → iniciar B2 y B3 en paralelo:** crear `contracts/data_contract.yaml` Y crear tabla `contracts` en Supabase simultáneamente.

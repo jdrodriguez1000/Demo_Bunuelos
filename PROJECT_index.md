@@ -10,10 +10,10 @@
 - **Etapa Activa:** `Etapa 1.3 — Definición del Data Contract (esquemas, tipos de datos, constraints)`
 - **Capa Medallón Activa:** `N/A`
 - **Documentos SDD Gobernantes:** Leer obligatoriamente antes de tomar decisiones arquitectónicas:
-  - PRD:    `docs/reqs/f01_03_prd.md` ⬜ (pendiente de crear)
-  - SPEC:   `docs/specs/f01_03_spec.md` ⬜ (pendiente de crear)
-  - Plan:   `docs/plans/f01_03_plan.md` ⬜ (pendiente de crear)
-  - Tareas: `docs/tasks/f01_03_task.md` ⬜ (pendiente de crear)
+  - PRD:    `docs/reqs/f01_03_prd.md` ✅ Aprobado
+  - SPEC:   `docs/specs/f01_03_spec.md` ✅ Aprobado
+  - Plan:   `docs/plans/f01_03_plan.md` ✅ Aprobado
+  - Tareas: `docs/tasks/f01_03_task.md` ✅ Aprobado
 
 ---
 
@@ -71,10 +71,10 @@
 | Plan Etapa 1.2 | `docs/plans/f01_02_plan.md` | ✅ Cerrado |
 | Tareas Etapa 1.2 | `docs/tasks/f01_02_task.md` | ✅ Cerrado |
 | Ejecutivo Etapa 1.2 | `docs/executives/f01_02_executive.md` | ✅ Cerrado |
-| PRD Etapa 1.3 | `docs/reqs/f01_03_prd.md` | ⬜ Pendiente |
-| SPEC Etapa 1.3 | `docs/specs/f01_03_spec.md` | ⬜ Pendiente |
-| Plan Etapa 1.3 | `docs/plans/f01_03_plan.md` | ⬜ Pendiente |
-| Tareas Etapa 1.3 | `docs/tasks/f01_03_task.md` | ⬜ Pendiente |
+| PRD Etapa 1.3 | `docs/reqs/f01_03_prd.md` | ✅ Aprobado |
+| SPEC Etapa 1.3 | `docs/specs/f01_03_spec.md` | ✅ Aprobado |
+| Plan Etapa 1.3 | `docs/plans/f01_03_plan.md` | ✅ Aprobado |
+| Tareas Etapa 1.3 | `docs/tasks/f01_03_task.md` | ✅ Aprobado |
 
 ---
 
@@ -90,3 +90,4 @@
 - **2026-03-22** — Bloque 5 (web/) diferido: conexión Next.js → Supabase se implementa en la primera etapa que produzca componentes de dashboard reales.
 - **2026-03-22** — TDD obligatorio (CC_00003) validado en práctica: 4 tests en rojo → implementación → 4 tests en verde. Ciclo completo ejecutado correctamente.
 - **2026-03-22** — CC_00004 aprobado: indicador de progreso del proyecto añadido a la gobernanza. Metodología: `Avance = Σ (Etapas Cerradas / E_i) × (100% / N)`. N y E_i son dinámicos — leídos de `PROJECT_index.md` al cerrar cada etapa. Impacto: `/close-stage` ahora inyecta el indicador automáticamente en cada ejecutivo.
+- **2026-03-23** — Etapa 1.3: los 4 documentos SDD (PRD, SPEC, Plan, Tasks) creados y aprobados. Artefactos: `contracts/data_contract.yaml` (estructura), tabla `contracts` en Supabase (con trigger de activación), módulos Python TDD (`contract_loader.py`, `contract_validator.py`). Implementación pendiente de ejecución.

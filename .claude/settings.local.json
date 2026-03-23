@@ -9,5 +9,8 @@
       "Bash(git add:*)",
       "Bash(git rm:*)"
     ]
+  },
+  "env": {
+    "SUPABASE_ACCESS_TOKEN": "sbp_fe7ea7f878ee5dce8feaefbaaaa0f978244697c7"
   }
 }
